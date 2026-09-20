@@ -25,6 +25,16 @@ jobs:
           packages: platform-tools platforms;android-34 build-tools;34.0.0
           accept-android-sdk-licenses: true
 
+      - name: Install Gradle
+        run: |
+          wget https://services.gradle.org/distributions/gradle-8.7-bin.zip
+          unzip gradle-8.7-bin.zip
+          echo "GRADLE_HOME=$PWD/gradle-8.7" >> $GITHUB_ENV
+          echo "$PWD/gradle-8.7/bin" >> $GITHUB_PATH
+
+      - name: Generate Gradle Wrapper
+        run: gradle wrapper --gradle-version 8.7
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
